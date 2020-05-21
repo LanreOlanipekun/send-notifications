@@ -12,7 +12,7 @@ firebase.initializeApp({
 });
 
 module.exports = {
-    sendEmail: (html, mailGunApiKey, mailGunDomain, to, from, subject) => {
+    sendEmail: (html, mailGunApiKey, mailGunDomain, to, from, subject, attachments) => {
         return new Promise((resolve, reject) => {
             const auth = {
                 auth: {
@@ -25,7 +25,8 @@ module.exports = {
                 from,
                 to,
                 subject,
-                html
+                html,
+                attachments
             }
             transporter.sendMail(mailOptions, (err, data) => {
                 if (err) {
