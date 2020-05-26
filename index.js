@@ -32,10 +32,14 @@ module.exports = {
         })
     },
     initializePush: (serviceAccount, databaseURL) => {
-        firebase.initializeApp({
-            credential: admin.credential.cert(serviceAccount),
-            databaseURL: databaseURL
-        });
+        return new Promise((resolve, reject) => {
+            firebase.initializeApp({
+                credential: admin.credential.cert(serviceAccount),
+                databaseURL: databaseURL
+            });
+            resolve()
+        })
+
     },
     sendPushnotification: (firebaseToken, payload, options) => {
         return new Promise((resolve, reject) => {
