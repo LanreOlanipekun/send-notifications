@@ -2,14 +2,9 @@
 
 const firebase = require("firebase-admin");
 var admin = require("firebase-admin");
-var serviceAccount = require("./notification-e6ff4-firebase-adminsdk-g8kgu-4f1f1408b8.json");
+// var serviceAccount = require("./notification-e6ff4-firebase-adminsdk-g8kgu-4f1f1408b8.json");
 var nodemailer = require('nodemailer');
 var nodemailMailgun = require('nodemailer-mailgun-transport');
-
-firebase.initializeApp({
-    credential: admin.credential.cert(serviceAccount),
-    databaseURL: "https://notification-e6ff4.firebaseio.com"
-});
 
 module.exports = {
     sendEmail: (html, mailGunApiKey, mailGunDomain, to, from, subject, attachments) => {
@@ -35,6 +30,12 @@ module.exports = {
                 resolve(data)
             })
         })
+    },
+    initializePush: (serviceAccount, databaseURL) => {
+        firebase.initializeApp({
+            credential: admin.credential.cert(serviceAccount),
+            databaseURL: databaseURL
+        });
     },
     sendPushnotification: (firebaseToken, payload, options) => {
         return new Promise((resolve, reject) => {
