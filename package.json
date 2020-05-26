@@ -1,6 +1,6 @@
 {
   "name": "send-notifications",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Send email, pushnotifications",
   "main": "index.js",
   "scripts": {
